@@ -20,7 +20,8 @@ embedded-io-async = "0.6.1"
 
 heapless = { version = "0.8", default-features = false }
 
-mcp2515 = "0.3.0"
+mcp2515 = { version = "0.3.0", optional = true }
+mcp2518fd = { git = "https://github.com/adom-inc/mcp2518fd.git", rev = "e85b53d0419cdb101e4f1e7b6d02033e016420be", optional = true }
 
 slcan = { version = "0.1.0", path = "../slcan"}
 
@@ -33,3 +34,8 @@ debug = 2
 lto = true
 incremental = false
 opt-level = 3
+
+[features]
+mcp2515 = ["dep:mcp2515"]
+mcp2518fd = ["dep:mcp2518fd"]
+default = ["mcp2518fd"]
