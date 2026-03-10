@@ -1,6 +1,7 @@
 #![no_std]
 
 use embedded_can::{ExtendedId, Id, StandardId};
+use defmt::info;
 
 fn nibble_to_hex_char(value: u8) -> u8 {
     match value {
@@ -252,6 +253,7 @@ impl SlcanSerializer {
     }
 
     fn parse_cmd(&self) -> Result<SlcanCommand, SlcanError> {
+        info!("Parse cmd parsing <{}>", self.msg_buffer[0] as char);
         match self.msg_buffer[0] {
             b'O' => self.deserialize_open_channel(),
             b'C' => self.deserialize_close_channel(),

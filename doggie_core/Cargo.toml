@@ -8,13 +8,13 @@ version = "0.1.0"
 
 defmt = "0.3"
 
-embassy-time = { version = "0.4.0", features = ["defmt", "defmt-timestamp-uptime"] }
 embassy-executor = { version = "0.7.0", features = ["executor-thread", "defmt"] }
 embassy-futures = { version = "0.1.1" }
 embassy-sync = { version = "0.7", features = ["defmt"] }
+embassy-time = { version = "0.4.0", features = ["defmt", "defmt-timestamp-uptime"] }
 
-embedded-hal = "1.0.0"
 embedded-can = "0.4.1"
+embedded-hal = "1.0.0"
 embedded-io = "0.6.1"
 embedded-io-async = "0.6.1"
 
@@ -23,7 +23,7 @@ heapless = { version = "0.8", default-features = false }
 mcp2515 = { version = "0.3.0", optional = true }
 mcp2518fd = { git = "https://github.com/adom-inc/mcp2518fd.git", rev = "e85b53d0419cdb101e4f1e7b6d02033e016420be", optional = true }
 
-slcan = { version = "0.1.0", path = "../slcan"}
+slcan = { version = "0.1.0", path = "../slcan" }
 
 [profile.dev]
 opt-level = "s"
@@ -31,11 +31,11 @@ opt-level = "s"
 [profile.release]
 codegen-units = 1
 debug = 2
-lto = true
 incremental = false
+lto = true
 opt-level = 3
 
 [features]
+default = ["mcp2515"]
 mcp2515 = ["dep:mcp2515"]
-mcp2518fd = ["dep:mcp2518fd"]
-default = ["mcp2518fd"]
+mcp2518fd = ["dep:mcp2518fd", "mcp2518fd/defmt"]

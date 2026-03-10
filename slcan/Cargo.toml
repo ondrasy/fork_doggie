@@ -5,3 +5,5 @@ edition = "2021"
 
 [dependencies]
 embedded-can = "0.4.1"
+defmt="0.3.8"
+defmt-rtt="0.4.1"

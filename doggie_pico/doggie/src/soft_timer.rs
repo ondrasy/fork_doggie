@@ -1,6 +1,7 @@
 use embedded_hal::delay::DelayNs;
 
-pub struct SoftTimer {}
+#[derive(Clone, Copy)]
+pub struct SoftTimer;
 
 impl DelayNs for SoftTimer {
     // Required method

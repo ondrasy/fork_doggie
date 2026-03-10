@@ -1,42 +1,44 @@
 [package]
+edition = "2021"
 name = "doggie"
 version = "0.1.0"
-edition = "2021"
 
 [dependencies]
-embassy-rp = { version = "0.4.0", features = ["defmt", "unstable-pac", "time-driver", "critical-section-impl", "rp2040"] }
-embassy-sync = { version = "0.7", features = ["defmt"] }
-embassy-executor = { version = "0.7.0", features = ["task-arena-size-98304", "arch-cortex-m", "executor-thread", "executor-interrupt", "defmt"] }
-embassy-time = { version = "0.4.0", features = ["defmt", "defmt-timestamp-uptime"] }
-embassy-futures = { version = "0.1.1" }
-embedded-io-async = { version = "0.6.1", features = ["defmt-03"] }
-embedded-io = "0.6.1"
-embedded-hal = "1.0.0"
-cortex-m-rt = "0.7.3"
 cortex-m = "0.7.7"
+cortex-m-rt = "0.7.3"
 defmt = "0.3.8"
 defmt-rtt = "0.4.1"
-panic-probe = "0.3.2"
-static_cell = "2.1"
+embassy-executor = { version = "0.7.0", features = ["task-arena-size-98304", "arch-cortex-m", "executor-thread", "executor-interrupt", "defmt"] }
+embassy-futures = { version = "0.1.1" }
+embassy-rp = { version = "0.4.0", features = ["defmt", "unstable-pac", "time-driver", "critical-section-impl", "rp2040"] }
+embassy-sync = { version = "0.7", features = ["defmt"] }
+embassy-time = { version = "0.4.0", features = ["defmt", "defmt-timestamp-uptime"] }
+embedded-hal = "1.0.0"
+embedded-io = "0.6.1"
+embedded-io-async = { version = "0.6.1", features = ["defmt-03"] }
+panic-probe = { version = "0.3.2", features = ["print-defmt"] }
 portable-atomic = { version = "1.5", features = ["critical-section"] }
+static_cell = "2.1"
 
-doggie_core = { version = "0.1.0", path = "../../doggie_core"}
-rp = { version = "0.1.0", path = "../rp"}
-
-mcp2515 = "0.3.0"
+doggie_core = { version = "0.1.0", path = "../../doggie_core" }
+rp = { version = "0.1.0", path = "../rp" }
 
 embassy-usb = { version = "0.3.0", features = ["defmt"], optional = true }
+mcp2515 = { version = "0.3.0", optional = true, default-features = false }
+mcp2518fd = { git = "https://github.com/adom-inc/mcp2518fd.git", rev = "e85b53d0419cdb101e4f1e7b6d02033e016420be", optional = true }
 
-doggie_ble = { version = "0.1.0", path = "../../doggie_ble", optional = true}
-bt-hci = { version = "0.2.0", optional = true}
+bt-hci = { version = "0.2.0", optional = true }
 cyw43 = { version = "0.3.0", features = ["defmt", "firmware-logs", "bluetooth"], optional = true }
 cyw43-pio = { version = "0.4.0", features = ["defmt"], optional = true }
+doggie_ble = { version = "0.1.0", path = "../../doggie_ble", optional = true }
 
 [features]
-usb = ["dep:embassy-usb"]
-uart = []
 ble = ["dep:doggie_ble", "dep:bt-hci", "dep:cyw43", "dep:cyw43-pio"]
-default = ["usb", "ble"]
+default = ["usb", "ble", "mcp2518fd"]
+mcp2515 = ["dep:mcp2515", "doggie_core/mcp2515"]
+mcp2518fd = ["dep:mcp2518fd", "doggie_core/mcp2518fd"]
+uart = []
+usb = ["dep:embassy-usb"]
 
 [profile.release]
 codegen-units = 1

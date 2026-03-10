@@ -3,7 +3,10 @@
 mod bsp;
 mod can;
 mod macros;
+#[cfg(feature = "mcp2515")]
 pub mod mcp2515;
+#[cfg(feature = "mcp2518fd")]
+pub mod mcp2518fd;
 mod types;
 
 pub use bsp::Bsp;
