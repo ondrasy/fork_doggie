@@ -34,6 +34,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "arbitrary-int"
+version = "1.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "825297538d77367557b912770ca3083f778a196054b3ee63b22673c4a3cae0a5"
+dependencies = [
+ "defmt 0.3.100",
+]
+
+[[package]]
 name = "arrayvec"
 version = "0.7.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -104,6 +113,12 @@ name = "bitfield"
 version = "0.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2d7e60934ceec538daadb9d8432424ed043a904d8e0243f3c6446bce549a46ac"
+
+[[package]]
+name = "bitfield"
+version = "0.17.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f798d2d157e547aa99aab0967df39edd0b70307312b6f8bd2848e6abe40896e0"
 
 [[package]]
 name = "bitflags"
@@ -191,6 +206,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "concat-idents"
+version = "1.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f76990911f2267d837d9d0ad060aa63aaad170af40904b29461734c339030d4d"
+dependencies = [
+ "quote",
+ "syn 2.0.106",
+]
+
+[[package]]
 name = "cortex-m"
 version = "0.7.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -232,6 +257,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "crc"
+version = "3.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5eb8a2a1cd12ab0d987a5d5e825195d372001a4094a0376319d5a0ad71c1ba0d"
+dependencies = [
+ "crc-catalog",
+]
+
+[[package]]
 name = "crc-any"
 version = "2.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -239,6 +273,12 @@ checksum = "a62ec9ff5f7965e4d7280bd5482acd20aadb50d632cf6c1d74493856b011fa73"
 dependencies = [
  "debug-helper",
 ]
+
+[[package]]
+name = "crc-catalog"
+version = "2.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "19d374276b40fb8bbdee95aef7c7fa6b5316ec764510eb64b8dd0e2ed0d7e7f5"
 
 [[package]]
 name = "critical-section"
@@ -429,6 +469,7 @@ dependencies = [
  "embedded-io",
  "embedded-io-async",
  "mcp2515",
+ "mcp2518fd",
  "panic-probe",
  "portable-atomic",
  "rp",
@@ -469,6 +510,7 @@ dependencies = [
  "embedded-io-async",
  "heapless",
  "mcp2515",
+ "mcp2518fd",
  "slcan",
 ]
 
@@ -1128,6 +1170,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "13dc2df351e3202783a1fe0d44375f7295ffb4049267b0f3018346dc122a1d94"
 
 [[package]]
+name = "maybe-async"
+version = "0.2.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5cf92c10c7e361d6b99666ec1c6f9805b0bea2c3bd8c78dc6fe98ac5bd78db11"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.106",
+]
+
+[[package]]
 name = "mcp2515"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1139,6 +1192,22 @@ dependencies = [
  "modular-bitfield",
  "nb 1.1.0",
  "void",
+]
+
+[[package]]
+name = "mcp2518fd"
+version = "0.1.0"
+source = "git+https://github.com/adom-inc/mcp2518fd.git?rev=e85b53d0419cdb101e4f1e7b6d02033e016420be#e85b53d0419cdb101e4f1e7b6d02033e016420be"
+dependencies = [
+ "arbitrary-int",
+ "bitfield 0.17.0",
+ "concat-idents",
+ "crc",
+ "defmt 0.3.100",
+ "embedded-can",
+ "embedded-hal 1.0.0",
+ "maybe-async",
+ "num_enum 0.7.4",
 ]
 
 [[package]]
@@ -1274,6 +1343,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4047d9235d1423d66cc97da7d07eddb54d4f154d6c13805c6d0793956f4f25b0"
 dependencies = [
  "cortex-m",
+ "defmt 0.3.100",
 ]
 
 [[package]]
@@ -1637,6 +1707,8 @@ checksum = "56199f7ddabf13fe5074ce809e7d3f42b42ae711800501b5b16ea82ad029c39d"
 name = "slcan"
 version = "0.1.0"
 dependencies = [
+ "defmt 0.3.100",
+ "defmt-rtt",
  "embedded-can",
 ]
 
